@@ -1,0 +1,283 @@
+<FluentXMLReport>
+<version>
+Fluent
+Version: 2d, dp, pbns, spe, rke (2d, double precision, pressure-based,  species, realizable k-epsilon)
+Release: 21.1.0
+Title: 
+</version>
+
+<Models>
+
+Models
+------
+
+   Model                        Settings                                
+   ------------------------------------------------------------------
+   Space                        2D                                      
+   Time                         Steady                                  
+   Viscous                      Realizable k-epsilon turbulence model   
+   Wall Treatment               Enhanced Wall Treatment                 
+   Heat Transfer                Enabled                                 
+   Solidification and Melting   Disabled                                
+   Radiation                    None                                    
+   Species                      Non-Reacting (5 species)                
+   Coupled Dispersed Phase      Disabled                                
+   NOx Pollutants               Disabled                                
+   SOx Pollutants               Disabled                                
+   Soot                         Disabled                                
+   Mercury Pollutants           Disabled                                
+   Structure                    Disabled                                
+   Acoustics                    Disabled                                
+   Eulerian Wall Film           Disabled                                
+   Potential/Li-ion Battery     Disabled                                
+   Multiphase                   Disabled                                
+
+</Models>
+
+<MaterialProperties>
+Material Properties
+-------------------
+
+   Material: carbon-monoxide-air (mixture)
+
+      Property               Units      Method                     Value(s)             
+      -------------------------------------------------------------------------------
+      Mixture Species                   names                      (o2 co2 co h2o n2)   
+      Density                kg/m^3     incompressible-ideal-gas   #f                   
+      Cp (Specific Heat)     J/(kg K)   mixing-law                 #f                   
+      Thermal Conductivity   W/(m K)    constant                   0.0454               
+      Viscosity              kg/(m s)   constant                   1.72e-05             
+      Mass Diffusivity       m^2/s      constant-dilute-appx       (2.88e-05)           
+      Speed of Sound         m/s        none                       #f                   
+
+   Material: (nitrogen . carbon-monoxide-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                    
+      ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   J/(kg K)   polynomial   (300-1000: 979.04298 0.4179639 -0.0011762792 1.6743943e-06 -7.2562971e-10) (1000-5000: 868.62291 0.44162954 -0.00016872295 2.9967875e-08 -2.0043858e-12)    
+      Molecular Weight     kg/kmol    constant     28.0134                                                                                                                                                     
+      Speed of Sound       m/s        none         #f                                                                                                                                                          
+
+   Material: (water-vapor . carbon-monoxide-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                  
+      ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   J/(kg K)   polynomial   (300-1000: 1563.0767 1.6037546 -0.0029327841 3.2161009e-06 -1.1568268e-09) (1000-5000: 1233.2338 1.4105233 -0.00040291411 5.5427718e-08 -2.949824e-12)    
+      Molecular Weight     kg/kmol    constant     18.01534                                                                                                                                                  
+      Speed of Sound       m/s        none         #f                                                                                                                                                        
+
+   Material: (carbon-monoxide . carbon-monoxide-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                 
+      ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   J/(kg K)   polynomial   (300-1000: 968.38986 0.44878771 -0.0011522171 1.6568822e-06 -7.34637e-10) (1000-5000: 897.93053 0.42823161 -0.00016713923 3.0234435e-08 -2.05137e-12)    
+      Molecular Weight     kg/kmol    constant     28.01055                                                                                                                                                 
+      Speed of Sound       m/s        none         #f                                                                                                                                                       
+
+   Material: (carbon-dioxide . carbon-monoxide-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                   
+      -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   J/(kg K)   polynomial   (300-1000: 429.92889 1.8744735 -0.001966485 1.2972514e-06 -3.9999562e-10) (1000-5000: 841.37645 0.59323928 -0.00024151675 4.5227279e-08 -3.1531301e-12)    
+      Molecular Weight     kg/kmol    constant     44.00995                                                                                                                                                   
+      Speed of Sound       m/s        none         #f                                                                                                                                                         
+
+   Material: (oxygen . carbon-monoxide-air) (fluid)
+
+      Property             Units      Method       Value(s)                                                                                                                                                      
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Cp (Specific Heat)   J/(kg K)   polynomial   (300-1000: 834.82647 0.29295801 -0.00014956371 3.4138849e-07 -2.2783585e-10) (1000-5000: 960.75234 0.15941258 -3.2708852e-05 4.6127648e-09 -2.9528324e-13)    
+      Molecular Weight     kg/kmol    constant     31.9988                                                                                                                                                       
+      Speed of Sound       m/s        none         #f                                                                                                                                                            
+
+   Material: air (fluid)
+
+      Property                        Units      Method     Value(s)     
+      ----------------------------------------------------------------
+      Density                         kg/m^3     constant   1.225        
+      Cp (Specific Heat)              J/(kg K)   constant   1006.43      
+      Thermal Conductivity            W/(m K)    constant   0.0242       
+      Viscosity                       kg/(m s)   constant   1.7894e-05   
+      Molecular Weight                kg/kmol    constant   28.966       
+      Thermal Expansion Coefficient   K^-1       constant   0            
+      Speed of Sound                  m/s        none       #f           
+
+   Material: aluminum (solid)
+
+      Property               Units      Method     Value(s)   
+      -----------------------------------------------------
+      Density                kg/m^3     constant   2719       
+      Cp (Specific Heat)     J/(kg K)   constant   871        
+      Thermal Conductivity   W/(m K)    constant   202.4      
+
+</MaterialProperties>
+
+<CellZoneConditions>
+Cell Zone Conditions
+--------------------
+
+   Zones
+
+      name       id   type    
+      ---------------------
+      interior   5    fluid   
+
+   Setup Conditions
+
+      interior
+
+         Condition       Value   
+         ---------------------
+         Frame Motion?   no      
+
+</CellZoneConditions>
+
+<BoundaryConditions>
+Boundary Conditions
+-------------------
+
+   Zones
+
+      name              id   type              
+      --------------------------------------
+      inlet_velocity    6    velocity-inlet    
+      inlet_pollutant   7    velocity-inlet    
+      blocks_walls      8    wall              
+      symmetry          9    symmetry          
+      pressure_outlet   10   pressure-outlet   
+
+   Setup Conditions
+
+      inlet_velocity
+
+         Condition                        Value                                                                                                                           
+         --------------------------------------------------------------------------------------------------------------------------------------------------------------
+         Velocity Magnitude [m/s]         5                                                                                                                               
+         Temperature [K]                  287                                                                                                                             
+         Turbulent Specification Method   Intensity and Hydraulic Diameter                                                                                                
+         Turbulent Intensity [%]          20                                                                                                                              
+         Hydraulic Diameter [m]           100                                                                                                                             
+                                          (((constant . 0.2) (profile  )) ((constant . 0.03) (profile  )) ((constant . 0) (profile  )) ((constant . 0.77) (profile  )))   
+
+      inlet_pollutant
+
+         Condition                        Value                                                                                                                   
+         ------------------------------------------------------------------------------------------------------------------------------------------------------
+         Velocity Magnitude [m/s]         2                                                                                                                       
+         Temperature [K]                  350                                                                                                                     
+         Turbulent Specification Method   Intensity and Hydraulic Diameter                                                                                        
+         Turbulent Intensity [%]          20                                                                                                                      
+         Hydraulic Diameter [m]           100                                                                                                                     
+                                          (((constant . 0) (profile  )) ((constant . 0) (profile  )) ((constant . 1) (profile  )) ((constant . 0) (profile  )))   
+
+      blocks_walls
+
+         Condition                     Value                                     
+         ---------------------------------------------------------------------
+         Thermal BC Type               Heat Flux                                 
+         Wall Motion                   Stationary Wall                           
+         Shear Boundary Condition      No Slip                                   
+         Species Boundary Conditions   Zero Diffusive Flux/Zero Diffusive Flux   
+
+      symmetry
+
+         Condition   Value   
+         -----------------
+
+      pressure_outlet
+
+         Condition                        Value                                                                                                                           
+         --------------------------------------------------------------------------------------------------------------------------------------------------------------
+         Backflow Total Temperature [K]   287                                                                                                                             
+         Backflow                         (((constant . 0.2) (profile  )) ((constant . 0.03) (profile  )) ((constant . 0) (profile  )) ((constant . 0.77) (profile  )))   
+
+</BoundaryConditions>
+
+<SolverSettings>
+Solver Settings
+---------------
+
+   Equations
+
+      Equation     Solved   
+      -------------------
+      Flow         yes      
+      Turbulence   yes      
+      o2           yes      
+      co2          yes      
+      co           yes      
+      h2o          yes      
+      Energy       yes      
+
+   Numerics
+
+      Numeric                         Enabled   
+      ---------------------------------------
+      Absolute Velocity Formulation   yes       
+
+   Pseudo Transient Explicit Relaxation Factors
+
+      Variable                     Relaxation Factor   
+      ----------------------------------------------
+      Density                      0.25                
+      Body Forces                  1                   
+      Turbulent Kinetic Energy     0.75                
+      Turbulent Dissipation Rate   0.75                
+      Turbulent Viscosity          1                   
+      o2                           0.75                
+      co2                          0.75                
+      co                           0.75                
+      h2o                          0.75                
+      Energy                       0.75                
+      Explicit Momentum            0.5                 
+      Explicit Pressure            0.5                 
+
+   Linear Solver
+
+      Variable                     Solver Type   Termination Criterion   Residual Reduction Tolerance   
+      -----------------------------------------------------------------------------------------------
+      Flow                         F-Cycle       0.1                                                    
+      Turbulent Kinetic Energy     F-Cycle       0.1                                                    
+      Turbulent Dissipation Rate   F-Cycle       0.1                                                    
+      o2                           F-Cycle       0.1                                                    
+      co2                          F-Cycle       0.1                                                    
+      co                           F-Cycle       0.1                                                    
+      h2o                          F-Cycle       0.1                                                    
+      Energy                       F-Cycle       0.1                                                    
+
+   Pressure-Velocity Coupling
+
+      Parameter          Value     
+      --------------------------
+      Type               Coupled   
+      Pseudo Transient   yes       
+
+   Discretization Scheme
+
+      Variable                     Scheme                
+      ------------------------------------------------
+      Pressure                     Second Order          
+      Momentum                     Second Order Upwind   
+      Turbulent Kinetic Energy     Second Order Upwind   
+      Turbulent Dissipation Rate   Second Order Upwind   
+      o2                           Second Order Upwind   
+      co2                          Second Order Upwind   
+      co                           Second Order Upwind   
+      h2o                          Second Order Upwind   
+      Energy                       Second Order Upwind   
+
+   Solution Limits
+
+      Quantity                         Limit   
+      --------------------------------------
+      Minimum Absolute Pressure        1       
+      Maximum Absolute Pressure        5e+10   
+      Minimum Temperature              1       
+      Maximum Temperature              5000    
+      Minimum Turb. Kinetic Energy     1e-14   
+      Minimum Turb. Dissipation Rate   1e-20   
+      Maximum Turb. Viscosity Ratio    1e+12   
+
+</SolverSettings>
+
+</FluentXMLReport>
